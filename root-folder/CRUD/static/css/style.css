@@ -3,6 +3,25 @@
     src: url('../fonts/SegoePro/SegoeProDisplay-Semilight.ttf');
 }
 
+p, a {
+    font-size: 18px;
+    color: white;
+
+}
+
+p {
+    opacity: 0.9;
+    margin: 2% 0% 0% 33%;
+} 
+
+
+a {
+    margin: 0% 0% 0% 33%;
+    list-style: none;
+    text-decoration: none;
+}
+
+
 body { 
     margin: 0;
     max-width: 100%;
@@ -46,7 +65,7 @@ form {
 
 input {
     position: relative;
-    width: 300px;
+    width: 55%;
     height: 30px;
     border-radius: 5px;
     font-size: 22px;
