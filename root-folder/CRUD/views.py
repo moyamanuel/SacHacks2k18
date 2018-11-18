@@ -24,6 +24,9 @@ def check_login_firebase(email, password):
     print('user_data: {}'.format(user_data))
     return user_data
 
+def gather_team_stats():
+    return dict(db.child('team_stats').child('home').get().val())
+
 def index(request):
     print('### AT INDEX ###')
     if request.GET.get('signin_button'):
@@ -37,9 +40,6 @@ def index(request):
         print('user_data:\n')
         print(user_data)
 
-        for k, v in user_data.items():
-            print(k,':',v)
-
         if user_data['localId'] == '':
             print('### NOT A VALID USER ###')
         else:
@@ -47,8 +47,23 @@ def index(request):
             return HttpResponseRedirect(base_url + 'verify_user')
     return render(request, 'CRUD/index.html')
 
+def team_analytics(request):
+    print('### AT TEAM ANALYTICS ###')
+    team_stats = gather_team_stats()
+    points = team_stats['pts']
+    threept_perc = team_stats['3p_perc']
+    assists = team_stats['ast']
+    rebounds = team_stats['reb']
+    rebounds_defensive = team_stats['dreb']
+    rebounds_offensive = team_stats['oreb']
+    field_goals = team_stats['fg']
+    field_goals_perc = team_stats['fg_perc']
+    free_throw_perc = team_stats['ft_perc']
+    steals = team_stats['stl']
+
+
 def test(request):
-    return HttpResponse("test! ")
+    return HttpResponse("test!")
 
 @csrf_exempt
 def verify_user(request):
