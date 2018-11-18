@@ -1,6 +1,18 @@
 <html>
 <body>
-    <p>Hi there!</p>
-    <p>It works!</p>
+    {% load static %}
+    <head>
+        <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    </head>
+    <div>
+        <form>
+            {% csrf_token %}
+            <h1>Welcome</h1>
+            <input type="text" name="username" placeholder="Username">
+            <input type="password" name="password" placeholder="Password">
+            <button type="submit" name="signin_button" value="Click">Sign In</button>
+        </form>
+    </div>
+
 </body>
 </html>
