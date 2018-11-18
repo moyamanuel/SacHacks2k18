@@ -4,6 +4,8 @@ import json
 from CRUD.firebase_config import firebase
 from requests.exceptions import HTTPError
 from django.views.decorators.csrf import csrf_exempt
+from datetime import datetime
+from CRUD.sentiment import analyze
 
 # Create your views here.
 
@@ -61,7 +63,6 @@ def team_analytics(request):
     free_throw_perc = team_stats['ft_perc']
     steals = team_stats['stl']
 
-
 def test(request):
     return HttpResponse("test!")
 
@@ -81,11 +82,30 @@ def verify_user(request):
 @csrf_exempt
 def user_info(request):
     if request.method == 'POST':
-        user_id = request.POST['localID']
+        user_id = request.POST['localId']
         user_info = db.child('users').child(user_id).get()
         return HttpResponse(json.dumps(user_info.val()))
 
-
+@csrf_exempt
+def post_comment(request):
+    print('### POST_COMMENT ROUTE ###')
+    if request.method == 'POST':
+        print('request.POST: {}'.format(request.POST))
+        comment_text = request.POST['comment_text']
+        timestamp = datetime.now().isoformat()
+        user_id = request.POST['localId']
+        post_id = request.POST['post_id']
+        print('comment_text: {}'.format(comment_text))
+        sentiment_data = analyze(comment_text)
+        print('sentiment_data: {}'.format(sentiment_data))
+        db.child('comments').push({
+            'comment_text': comment_text,
+            'timestamp': timestamp,
+            'user_id': user_id,
+            'sentiment_data': sentiment_data['document_tone']['tones'],
+            'post_id': post_id,
+        })
+        return HttpResponse(sentiment_data)
 
 # def home_signin(request):
 #     if request.GET.get('signin_button'):
@@ -99,17 +119,3 @@ def user_info(request):
 # def make_post(request):
 #     if request.method == 'POST':
 #         filename = request.POST['filename']
-
-
-
-
-
-
-
-# @csrf_exempt
-# def post_comment(request):
-#     if request.method == 'POST':
-#         comment_text = request.POST['comment_text']
-#         timestamp = request.POST['timestamp']
-#         user_id = request.POST['localID']
-#         # TODO fix this now 
