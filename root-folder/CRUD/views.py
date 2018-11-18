@@ -11,6 +11,13 @@ auth = firebase.auth()
 db = firebase.database()
 
 def index(request):
+    print('### AT INDEX ###')
+    if request.GET.get('signin_button'):
+        print('### PRESSED SIGNIN BUTTON ###')
+        email = request.GET.get('username')
+        password = request.GET.get('password')
+        print('email: %s' % email)
+        print('password: %s' % password)
     return render(request, 'CRUD/index.html')
 
 def test(request):
@@ -36,21 +43,29 @@ def user_info(request):
         user_info = db.child('users').child(user_id).get()
         return HttpResponse(json.dumps(user_info.val()))
 
-@csrf_exempt
-def make_post(request):
-    if request.method == 'POST':
-        filename = request.POST['filename']
-        
+# def home_signin(request):
+#     if request.GET.get('signin_button'):
+#         email = request.GET.get('username')
+#         password = request.GET.get('password')
+#         print('email: %s' % email)
+#         print('password: %s' % password)
+
+
+# @csrf_exempt
+# def make_post(request):
+#     if request.method == 'POST':
+#         filename = request.POST['filename']
 
 
 
 
 
 
-@csrf_exempt
-def post_comment(request):
-    if request.method == 'POST':
-        comment_text = request.POST['comment_text']
-        timestamp = request.POST['timestamp']
-        user_id = request.POST['localID']
-        # TODO fix this now 
+
+# @csrf_exempt
+# def post_comment(request):
+#     if request.method == 'POST':
+#         comment_text = request.POST['comment_text']
+#         timestamp = request.POST['timestamp']
+#         user_id = request.POST['localID']
+#         # TODO fix this now 
