@@ -1,1 +1,67 @@
-background { background: green; }
+@font-face {
+    font-family: SegoePro;
+    src: url('../fonts/SegoePro/SegoeProDisplay-Semilight.ttf');
+}
+
+body { 
+    margin: 0;
+    max-width: 100%;
+    height: 100%;
+    background-image: url('../images/login.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+h1 {
+    font-family: SegoePro;
+    padding: 0% 0% 0% 15%;
+    font-size: 52px;
+    color: white;
+}
+
+button {
+    width: 190px;
+    padding: 2%;
+    margin: 2% 0% 2% 30%;
+    background: #69479C;
+    color: white;
+    opacity: 0.9;
+    font-size: 22px;
+    box-shadow: 0px 0px 10px black;
+    border: unset;
+}
+
+div {
+    width: 100%;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 48%;
+    float: right;
+}
+
+input {
+    position: relative;
+    width: 300px;
+    height: 30px;
+    border-radius: 5px;
+    font-size: 22px;
+    -webkit-appearance: unset;
+    background-color: unset;
+    -webkit-rtl-ordering: unset;
+    cursor: text;
+    padding: unset;
+    border-width: unset;
+    border-style: unset;
+    border-color: unset;
+    border-image: unset;
+    background: white;
+    opacity: 0.9;
+    margin: 1% 0% 1% 15%;
+    display: inline-block;
+    padding: 2.5%;
+}

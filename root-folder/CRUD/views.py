@@ -11,7 +11,7 @@ auth = firebase.auth()
 db = firebase.database()
 
 def index(request):
-    return HttpResponse("Hello World")
+    return render(request, 'CRUD/index.html')
 
 def test(request):
     return HttpResponse("test! ")
